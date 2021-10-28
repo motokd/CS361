@@ -1,15 +1,23 @@
 from flask import Flask, render_template, url_for, flash, redirect
-from forms import Registration, Login
+from forms import Registration, Login, AddTask
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245dgfbasfhgha'
 
-posts = [
+tasks = [
     {
         'title': 'Task 1',
         'content': 'details of task content would go here....',
         'priority': 'low',
-        'date_posted' : '10/27/2021'
+        'date_posted': '10/27/2021'
+    }
+
+]
+
+users = [
+    {
+        'username': 'david',
+        'password': 'password'
     }
 
 ]
@@ -18,7 +26,7 @@ posts = [
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', posts=posts)
+    return render_template('home.html', tasks=tasks)
 
 
 @app.route("/about")
@@ -39,16 +47,21 @@ def register():
 def login():
     form = Login()
     if form.validate_on_submit():
-        if form.username.data == 'test' and form.password.data == 'password':
+        if form.username.data == 'david' and form.password.data == 'password':
             flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@app.route("/new-task", methods=['GET', 'POST'])
-def addtask():
+
+@app.route("/addtask", methods=['GET', 'POST'])
+def add():
     form = AddTask()
+    if form.validate_on_submit():
+        flash(f'Task Added Successfully', 'success')
+        return redirect(url_for('login'))
+    return render_template('addtask.html', title='Add Task', form=form)
 
 
 if __name__ == '__main__':
