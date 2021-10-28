@@ -3,20 +3,14 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+          <a class="navbar-brand mr-4" href="/">TASKS MANAGER</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-
-
-
-              <!-- <a class="nav-item nav-link" href="{{ url_for('addtask') }}">Add Task</a> -->
-
-
-
+              <a class="nav-item nav-link" href="{{ url_for('add') }}">Add Task</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -26,15 +20,29 @@
         </div>
       </nav>
     </header>
-    {% for post in posts %}
+
+    <body>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>QUICK LINKS</h3>
+            <p class='text-muted'> Add Task: redirects to adding a new task
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light"><a href="addtask">Add Task</a></li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+    {% for task in tasks %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <small class="text-muted">{{ post.date_posted }}</small>
+              <small class="text-muted">{{ task.date_posted }}</small>
             </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-             <p class="article-content"> {{ post.content }}</p>
-            <p class="article-priority">{{ post.priority }}</p>
+            <h2><a class="article-title" href="#">{{ task.title }}</a></h2>
+             <p class="article-content"> {{ task.content }}</p>
+            <p class="article-priority">{{ task.priority }}</p>
           </div>
         </article>
     {% endfor %}

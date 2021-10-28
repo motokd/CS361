@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, SelectField
 from wtforms.validators import DataRequired, Length
 
 
@@ -17,3 +17,6 @@ class Login(FlaskForm):
 
 class AddTask(FlaskForm):
     add_task = StringField('Task Title')
+    date = DateTimeField('Due Date')
+    priority = SelectField('Priority', coerce=str, choices=[('HIGH'), ('medium'), ('low')])
+    submit = SubmitField('ADD TASK')
