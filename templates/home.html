@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+
+
+
+              <!-- <a class="nav-item nav-link" href="{{ url_for('addtask') }}">Add Task</a> -->
+
+
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{{ url_for('login') }}">Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    {% for post in posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+             <p class="article-content"> {{ post.content }}</p>
+            <p class="article-priority">{{ post.priority }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
