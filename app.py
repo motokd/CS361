@@ -1,68 +1,17 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import Registration, Login, AddTask
+from flask import Flask, session, render_template, redirect, request
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245dgfbasfhgha'
 
-tasks = [
-    {
-        'title': 'Task 1',
-        'content': 'details of task content would go here....',
-        'priority': 'low',
-        'date_posted': '10/27/2021'
-    }
-
-]
-
-users = [
-    {
-        'username': 'david',
-        'password': 'password'
-    }
-
-]
-
-
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template('home.html', tasks=tasks)
-
-
-@app.route("/about")
-def about():
-    return render_template('about.html', title='About')
-
-
-@app.route("/register", methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = Registration()
-    if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    if request.method == "POST":
+        credentials_username = request.form['username']
+        credentials_password = request.form['password']
+        credentials_filename = "credentials.txt"
+        credentials_file = open(credentials_filename, "a")
+        credentials_file.write(str(credentials_username) + ', ' + str(credentials_password) + ', ')
+        credentials_file.close()
 
+    return render_template("register.html")
 
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    form = Login()
-    if form.validate_on_submit():
-        if form.username.data == 'david' and form.password.data == 'password':
-            flash('You have been logged in!', 'success')
-            return redirect(url_for('home'))
-        else:
-            flash('Login Unsuccessful. Please check username and password', 'danger')
-    return render_template('login.html', title='Login', form=form)
-
-
-@app.route("/addtask", methods=['GET', 'POST'])
-def add():
-    form = AddTask()
-    if form.validate_on_submit():
-        flash(f'Task Added Successfully', 'success')
-        return redirect(url_for('login'))
-    return render_template('addtask.html', title='Add Task', form=form)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=True)
