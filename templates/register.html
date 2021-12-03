@@ -32,6 +32,12 @@
                         {{ form.password(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+                <small>
+                    Need help with a password?
+                    <div class="form-group">
+                        <button type="button" onclick="alert('Al Adam 1534')">Click Me!</button>
+                    </div>
+                </small>
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
@@ -43,4 +49,7 @@
             Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
         </small>
     </div>
+    <script type="text/javascript">
+
+    </script>
 {% endblock content %}
