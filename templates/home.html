@@ -1,48 +1,42 @@
 {% extends "layout.html" %}
 {% block content %}
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <nav>
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">TASKS MANAGER</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <a href="/">TASKS MANAGER</a>
+          <button type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-              <a class="nav-item nav-link" href="{{ url_for('add') }}">Add Task</a>
+          <div id="navbarToggle">
+            <div>
+              <a href="{{ url_for('home') }}">Home</a>
+              <a href="{{ url_for('add') }}">Add Task</a>
+                <a href="{{ url_for('help') }}">Add Task</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="{{ url_for('login') }}">Logout</a>
+              <a href="{{ url_for('login') }}">Logout</a>
             </div>
           </div>
         </div>
       </nav>
     </header>
-
-    <body>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>QUICK LINKS</h3>
-            <p class='text-muted'> Add Task: redirects to adding a new task
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light"><a href="addtask">Add Task</a></li>
-              </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-    </body>
     {% for task in tasks %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <small class="text-muted">{{ task.date_posted }}</small>
+              <a class="mr-2" href="{{ url_for('task', task_id=task.task_id) }}">{{ task.task_title }}</a>
+                <br><br>
+                <small>Due Date:</small>
+              <small class="text-muted">{{ task.task_duedate.strftime('%Y-%m-%d') }}</small>
+                <br><br>
+                <small>Priority:</small>
+               <small class="task-priority">{{ task.task_priority }}</small>
+                <br><br>
             </div>
-            <h2><a class="article-title" href="#">{{ task.title }}</a></h2>
-             <p class="article-content"> {{ task.content }}</p>
-            <p class="article-priority">{{ task.priority }}</p>
+             <small>Details:</small>
+              <br>
+            <small class="article-content">{{ task.task_details }}</small>
           </div>
         </article>
     {% endfor %}

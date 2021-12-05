@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+    <header class="site-header">
+      <nav>
+        <div class="container">
+          <a href="/">TASKS MANAGER</a>
+          <button type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarToggle">
+            <div>
+              <a href="{{ url_for('home') }}">Home</a>
+              <a href="{{ url_for('add') }}">Add Task</a>
+                <a href="{{ url_for('help') }}">Add Task</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a href="{{ url_for('login') }}">Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <h1>Help Page</h1>
+    <br><br><br>
+    <h3>About</h3>
+    <br>
+    <p>This program is used to help plan for your tasks online. It could be personal tasks, tasks for school,
+    or business related tasks. Due dates help remind you of when the task is due so that you wont forget.</p>
+    <br><br>
+    <h3>Guide</h3>
+    <p>&bull; Click on "Add Task" either in the navigation window or the quicklinks guide to add a new task.</p>
+    <p>&bull; To add a task fill out all the applicable information. This is the task title, priority, and due date.
+        Task details are not required. If information is not entered correctly, you will be notified.</p>
+    <p>&bull; If adding the task is successful, you will be redirected to the home page where you can see the task and its details.</p>
+    <p>&bull; From the home page, you can click on a task title and edit or delete the task.</p>
+{% endblock content %}
